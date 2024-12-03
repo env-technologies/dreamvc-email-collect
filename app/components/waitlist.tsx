@@ -6,7 +6,7 @@ import { addToWaitlist } from "../actions/addToWaitlist";
 export default function Waitlist() {
   const [formData, setFormData] = useState<{ name: string; email: string }>({
     name: "",
-    email: "",
+    email: ""
   });
   const [message, setMessage] = useState<string>("");
   const [isPending, startTransition] = useTransition();
@@ -49,7 +49,7 @@ export default function Waitlist() {
         placeholder="Your Name"
         value={formData.name}
         onChange={handleChange}
-        className="w-full p-3 rounded border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200"
+        className="w-full p-2 outline-none bg-[#0c1704] border border-[#]"
       />
       <input
         type="email"
@@ -57,14 +57,14 @@ export default function Waitlist() {
         placeholder="Your Email"
         value={formData.email}
         onChange={handleChange}
-        className="w-full p-3 rounded border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200"
+        className="w-full p-2 outline-none bg-[#0c1704] border border-[#]"
       />
       <button
         type="submit"
         disabled={isPending}
-        className={`px-6 py-3 rounded ${
-          isPending ? "bg-gray-500" : "bg-blue-600"
-        } text-white hover:bg-blue-700`}
+        className={`px-6 py-2 border ${
+          isPending ? "bg-gray-500" : ""
+        } text-white`}
       >
         {isPending ? "Submitting..." : "Join Waitlist"}
       </button>
