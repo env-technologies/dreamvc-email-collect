@@ -14,11 +14,12 @@ const ses = new AWS.SES({
 interface WaitlistInput {
   name: string;
   email: string;
+  investmentInterest: string;
 }
 
-export async function addToWaitlist({ name, email }: WaitlistInput) {
-  if (!name || !email) {
-    throw new Error("Name and email are required.");
+export async function addToWaitlist({ name, email, investmentInterest }: WaitlistInput) {
+  if (!name || !email || !investmentInterest) {
+    throw new Error("Name, email, and investment interest are required.");
   }
 
   if (!process.env.SES_SOURCE_EMAIL) {
@@ -28,8 +29,14 @@ export async function addToWaitlist({ name, email }: WaitlistInput) {
   try {
     await connectDB();
 
+    // Check for duplicate email
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      throw new Error("Email already registered.");
+    }
+
     // Save user to MongoDB
-    const newUser: IUser = new User({ name, email });
+    const newUser: IUser = new User({ name, email, investmentInterest });
     await newUser.save();
 
     // Send acknowledgment email via AWS SES
@@ -55,8 +62,8 @@ export async function addToWaitlist({ name, email }: WaitlistInput) {
     await ses.sendEmail(params).promise();
 
     return "Successfully added to waitlist!";
-  } catch (error) {
-    console.error("Error in addToWaitlist:", error);
-    throw new Error("Failed to add to the waitlist.");
+  } catch (error: any) {
+    console.error("Error in addToWaitlist:", error.message || error);
+    throw new Error(error.message || "Failed to add to the waitlist.");
   }
 }
