@@ -62,8 +62,8 @@ export async function addToWaitlist({ name, email, investmentInterest }: Waitlis
     await ses.sendEmail(params).promise();
 
     return "Successfully added to waitlist!";
-  } catch (error: any) {
-    console.error("Error in addToWaitlist:", error.message || error);
-    throw new Error(error.message || "Failed to add to the waitlist.");
+  } catch (error) {
+    console.error("Error in addToWaitlist:", error instanceof Error ? error.message : error);
+    throw new Error(error instanceof Error ? error.message : "Failed to add to the waitlist.");
   }
 }
