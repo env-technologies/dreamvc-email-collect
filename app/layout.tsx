@@ -14,7 +14,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Join Our Waitlist",
+  title: "HODLL - JOIN OUR WAITLIST",
   description: "Join our waitlist to get early access to our exclusive offers and updates.",
 };
 
