@@ -14,11 +14,10 @@ const ses = new AWS.SES({
 interface WaitlistInput {
   name: string;
   email: string;
-  investmentInterest: string;
 }
 
-export async function addToWaitlist({ name, email, investmentInterest }: WaitlistInput) {
-  if (!name || !email || !investmentInterest) {
+export async function addToWaitlist({ name, email }: WaitlistInput) {
+  if (!name || !email) {
     throw new Error("Name, email, and investment interest are required.");
   }
 
@@ -36,7 +35,7 @@ export async function addToWaitlist({ name, email, investmentInterest }: Waitlis
     }
 
     // Save user to MongoDB
-    const newUser: IUser = new User({ name, email, investmentInterest });
+    const newUser: IUser = new User({ name, email });
     await newUser.save();
 
     // Send acknowledgment email via AWS SES
