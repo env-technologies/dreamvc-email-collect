@@ -46,8 +46,8 @@ export default function Home() {
           <Image src="/a&a.svg" alt="A & A Logo" width={70} height={60} />
         </div>
         <header className="flex flex-col items-center mb-12">
-          <p className="text-[#E7F940] text-3xl">Coming Soon</p>
-          <h1 className="text-5xl text-center font-semibold text-[#FFFFFF] mt-6 leading-tight">
+          <p className="text-[#E7F940] text-3xl md:pt-0 pt-5">Coming Soon</p>
+          <h1 className="md:text-5xl text-4xl text-center font-semibold text-[#FFFFFF] mt-6 leading-tight">
             BEYOND NUMBERS: <br /> AN AFRICAN INVESTMENT SALARIES REPORT 2025
           </h1>
           <p className="text-lg text-center text-[#FFFFFF]/50 mt-4 max-w-2xl">
