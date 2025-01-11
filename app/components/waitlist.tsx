@@ -56,7 +56,7 @@ export default function Waitlist() {
         placeholder="Enter your name"
         value={formData.name}
         onChange={handleChange}
-        className="w-full p-3 mb-4 text-base placeholder:text-[#777E73] bg-[#ffffff] border border-[#3C3C3C] rounded focus:outline-none focus:ring-2 focus:ring-[#6FC72A]"
+        className="w-full p-3 mb-4 text-base placeholder:text-[#777E73] bg-[#ffffff] text-black border border-[#3C3C3C] rounded focus:outline-none focus:ring-2 focus:ring-[#6FC72A]"
       />
       <label className="text-[#C1CCBC] text-sm mb-1" htmlFor="email">
         Email Address
@@ -67,7 +67,7 @@ export default function Waitlist() {
         placeholder="Enter your email here"
         value={formData.email}
         onChange={handleChange}
-        className="w-full p-3 mb-4 text-base placeholder:text-[#777E73] bg-[#ffffff] border border-[#3C3C3C] rounded focus:outline-none focus:ring-2 focus:ring-[#6FC72A]"
+        className="w-full p-3 mb-4 text-base placeholder:text-[#777E73] bg-[#ffffff] text-black border border-[#3C3C3C] rounded focus:outline-none focus:ring-2 focus:ring-[#6FC72A]"
       />
       <button
         type="submit"
