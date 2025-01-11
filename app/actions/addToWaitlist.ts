@@ -18,7 +18,7 @@ interface WaitlistInput {
 
 export async function addToWaitlist({ name, email }: WaitlistInput) {
   if (!name || !email) {
-    throw new Error("Name, email, and investment interest are required.");
+    throw new Error("Name, email are required.");
   }
 
   if (!process.env.SES_SOURCE_EMAIL) {
@@ -47,7 +47,7 @@ export async function addToWaitlist({ name, email }: WaitlistInput) {
         Body: {
           Text: {
             Charset: "UTF-8",
-            Data: `Hello ${name},\n\nThank you for joining our waitlist! We'll keep you updated.\n\nBest regards,\nYour Team`,
+            Data: `Hello ${name},\n\nThank you for joining our waitlist! We'll keep you updated.\n\nBest regards,\nAfrica Investment Report`,
           },
         },
         Subject: {
