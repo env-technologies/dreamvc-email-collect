@@ -14,8 +14,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "HODLL - JOIN OUR WAITLIST",
-  description: "Join our waitlist to get early access to our exclusive offers and updates.",
+  title: "Beyond Numbers",
+  description: "An African Investment Salary Report",
 };
 
 export default function RootLayout({
@@ -27,7 +27,15 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        style={{ backgroundImage: 'url("/Gradient.svg")' }}
+        style={{
+          backgroundImage: 'url("/Gradient.svg")',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
+          minHeight: '100vh',
+          margin: 0,
+        }}
       >
         {children}
       </body>

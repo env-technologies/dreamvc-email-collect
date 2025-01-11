@@ -30,12 +30,12 @@ export default function Home() {
           content="Be the first to access insights from over 200 professionals across Africa's top investment hubs."
         />
         <meta property="og:image" content="/african_investment_report.png" />
-        <meta property="og:url" content="https://dreamvc.com" />
-        <meta property="og:site_name" content="Dream VC" />
+        <meta property="og:url" content="https://africainvestmentsalaries.com" />
+        <meta property="og:site_name" content="Africa Investment Report" />
         <meta property="og:type" content="website" />
         <title>African Investment Salaries Report 2025</title>
       </Head>
-      <div className="flex flex-col items-center justify-center px-10 text-white min-h-screen">
+      <div className="flex flex-col items-center justify-center px-10 py-5 text-white min-h-screen">
         <div className="flex w-full justify-between">
           <Image
             src="/LogoWhite.svg"
@@ -43,11 +43,11 @@ export default function Home() {
             width={180}
             height={60}
           />
-          <Image src="/a&a.svg" alt="Dream VC Logo" width={70} height={60} />
+          <Image src="/a&a.svg" alt="A & A Logo" width={70} height={60} />
         </div>
         <header className="flex flex-col items-center mb-12">
-          <p className="text-[#E7F940] text-3xl mt-4">Coming Soon</p>
-          <h1 className="text-4xl text-center font-bold text-[#FFFFFF] mt-6 leading-tight">
+          <p className="text-[#E7F940] text-3xl">Coming Soon</p>
+          <h1 className="text-5xl text-center font-semibold text-[#FFFFFF] mt-6 leading-tight">
             BEYOND NUMBERS: <br /> AN AFRICAN INVESTMENT SALARIES REPORT 2025
           </h1>
           <p className="text-lg text-center text-[#FFFFFF]/50 mt-4 max-w-2xl">
@@ -59,7 +59,7 @@ export default function Home() {
         <main className=" rounded-lg shadow-lg w-full max-w-xl">
           <Waitlist />
         </main>
-        <footer className="my-8 text-center text-[#777E73] text-sm">
+        <footer className="mt-5 text-center text-[#777E73] text-md">
           Powered by Dream VC and A&A Collective
         </footer>
       </div>
