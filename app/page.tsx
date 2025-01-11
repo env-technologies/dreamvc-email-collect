@@ -15,7 +15,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
           name="description"
-          content="Sign up to access the African Investment Salaries Report 2025 and stay updated with exclusive insights."
+          content="Beyond Numbers: An African Investment Salary Report"
         />
         <meta
           name="keywords"
@@ -31,7 +31,7 @@ export default function Home() {
         />
         <meta property="og:image" content="/african_investment_report.png" />
         <meta property="og:url" content="https://africainvestmentsalaries.com" />
-        <meta property="og:site_name" content="Africa Investment Report" />
+        <meta property="og:site_name" content="Beyond Numbers: An African Investment Salary Report" />
         <meta property="og:type" content="website" />
         <title>African Investment Salaries Report 2025</title>
       </Head>

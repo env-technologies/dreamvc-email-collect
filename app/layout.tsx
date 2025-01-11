@@ -14,8 +14,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Beyond Numbers",
-  description: "An African Investment Salary Report",
+  title: "Beyond Numbers: An African Investment Salary Report",
 };
 
 export default function RootLayout({
