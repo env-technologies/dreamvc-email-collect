@@ -17,32 +17,31 @@ interface WaitlistInput {
 }
 
 export async function addToWaitlist({ name, email }: WaitlistInput) {
-  if (!name || !email) {
-    throw new Error("Name, email are required.");
-  }
-
-  if (!process.env.SES_SOURCE_EMAIL) {
-    throw new Error("SES_SOURCE_EMAIL is not defined in environment variables.");
-  }
-
   try {
-    await connectDB();
-
-    // Check for duplicate email
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      throw new Error("Email already registered.");
+    // ✅ Validate input
+    if (!name || !email) {
+      return { success: false, message: "Name and email are required." };
     }
 
-    // Save user to MongoDB
-    const newUser: IUser = new User({ name, email });
+    // ✅ Connect to the database
+    await connectDB();
+
+    // ✅ Normalize the email (remove spaces, lowercase)
+    const normalizedEmail = email.trim().toLowerCase();
+
+    // ✅ Check if the email already exists
+    const existingUser = await User.findOne({ email: normalizedEmail });
+    if (existingUser) {
+      return { success: false, message: "Email already registered." };
+    }
+
+    // ✅ Save the user to the database
+    const newUser: IUser = new User({ name, email: normalizedEmail });
     await newUser.save();
 
-    // Send acknowledgment email via AWS SES
+    // ✅ Send confirmation email using AWS SES
     const params = {
-      Destination: {
-        ToAddresses: [email],
-      },
+      Destination: { ToAddresses: [normalizedEmail] },
       Message: {
         Body: {
           Text: {
@@ -55,14 +54,16 @@ export async function addToWaitlist({ name, email }: WaitlistInput) {
           Data: "Waitlist Confirmation",
         },
       },
-      Source: process.env.SES_SOURCE_EMAIL, // Verified email address
+      Source: process.env.SES_SOURCE_EMAIL!,
     };
 
     await ses.sendEmail(params).promise();
 
-    return "Successfully added to waitlist!";
+    // ✅ Success Response
+    return { success: true, message: "Successfully added to the waitlist!" };
+
   } catch (error) {
-    console.error("Error in addToWaitlist:", error instanceof Error ? error.message : error);
-    throw new Error(error instanceof Error ? error.message : "Failed to add to the waitlist.");
+    console.error("Error in addToWaitlist:", error);
+    return { success: false, message: "An unexpected error occurred. Please try again." };
   }
 }

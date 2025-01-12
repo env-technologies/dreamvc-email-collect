@@ -8,8 +8,12 @@ export default function Waitlist() {
     name: "",
     email: "",
   });
-  const [message, setMessage] = useState<string>("");
+  const [message, setMessage] = useState<{ success: boolean; message: string }>({
+    success: false,
+    message: "",
+  });
   const [isPending, startTransition] = useTransition();
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
@@ -19,19 +23,28 @@ export default function Waitlist() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
 
+    // ✅ Validate form input
     if (!formData.name || !formData.email) {
-      setMessage("Please fill out all fields.");
+      setMessage({ success: false, message: "Please fill out all fields." });
       return;
     }
 
+    // ✅ Handle submission with transition
     startTransition(() => {
       addToWaitlist(formData)
-        .then((result: string) => {
+        .then((result: { success: boolean; message: string }) => {
           setMessage(result);
-          setFormData({ name: "", email: "" });
+
+          if (result.success) {
+            setFormData({ name: "", email: "" });
+            setIsSubmitted(true);
+          } else {
+            setIsSubmitted(false);
+          }
         })
-        .catch((error: Error) => {
-          setMessage(error.message || "An unexpected error occurred.");
+        .catch(() => {
+          setMessage({ success: false, message: "An unexpected error occurred. Please try again." });
+          setIsSubmitted(false);
         });
     });
   };
@@ -47,6 +60,7 @@ export default function Waitlist() {
       <p className="text-center text-[#CCCCCC] mb-6 text-xl">
         Sign up to stay updated and be notified when the full report goes live!
       </p>
+
       <label className="text-[#C1CCBC] text-sm mb-1" htmlFor="name">
         Full Name
       </label>
@@ -58,6 +72,7 @@ export default function Waitlist() {
         onChange={handleChange}
         className="w-full p-3 mb-4 text-base placeholder:text-[#777E73] bg-[#ffffff] text-black border border-[#3C3C3C] rounded focus:outline-none focus:ring-2 focus:ring-[#6FC72A]"
       />
+
       <label className="text-[#C1CCBC] text-sm mb-1" htmlFor="email">
         Email Address
       </label>
@@ -69,22 +84,24 @@ export default function Waitlist() {
         onChange={handleChange}
         className="w-full p-3 mb-4 text-base placeholder:text-[#777E73] bg-[#ffffff] text-black border border-[#3C3C3C] rounded focus:outline-none focus:ring-2 focus:ring-[#6FC72A]"
       />
+
       <button
         type="submit"
-        disabled={isPending}
+        disabled={isPending || isSubmitted}
         className={`w-full py-3 rounded text-lg font-semibold text-black transition-all duration-200 ${
-          isPending ? "bg-gray-500 cursor-not-allowed" : "bg-[#E7F940] hover:bg-[#E7F940]/80"
+          isPending || isSubmitted ? "bg-[#E5ECAD] cursor-not-allowed" : "bg-[#E7F940] hover:bg-[#E7F940]/80"
         }`}
       >
-        {isPending ? "Submitting..." : "Notify Me"}
+        {isSubmitted ? "You're In! We'll keep you posted" : isPending ? "Submitting..." : "Notify Me"}
       </button>
-      {message && (
+
+      {message.message && (
         <p
           className={`text-center text-sm mt-4 ${
-            message.includes("successfully") ? "text-green-400" : "text-red-400"
+            message.success ? "text-green-400" : "text-red-400"
           }`}
         >
-          {message}
+          {message.message}
         </p>
       )}
     </form>
