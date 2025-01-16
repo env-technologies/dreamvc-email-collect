@@ -22,6 +22,9 @@ import FirmTypes from "./components/graphs/4/FirmType";
 import FirmEstablishmentYears from "./components/graphs/4/FirmEstab";
 import SalaryCurrencyDistribution from "./components/graphs/4/SalaryCurr";
 import OverallAUMDistribution from "./components/graphs/5/OverallAUM";
+import AUMDistributionByFundType from "./components/graphs/5/AUMDist";
+import AUMByGenderChart from "./components/graphs/5/AUMGen";
+import MostCommonRolesChart from "./components/graphs/5/MostComm";
 
 const ageData = [
   { age: 25, count: 15 },
@@ -140,6 +143,21 @@ export default function Home() {
         description="A comprehensive look at the distribution of AUM across different fund types, regions, and gender representation."
       />
       <OverallAUMDistribution/>
+      <AUMDistributionByFundType/>
+      <div className="flex mx-10 gap-x-5">
+        <div className="w-1/2">
+          <AUMByGenderChart />
+        </div>
+        <div className="w-1/2">
+          <MostCommonRolesChart />
+        </div>
+      </div>
+      <GraphTitle
+        number="6"
+        title="Salary & Compensation Insights"
+        description="An in-depth analysis of salary distribution, bonuses, pay disparity, and compensation trends across various roles and firm types in the African investment landscape."
+      />
+      
     </>
   );
 }

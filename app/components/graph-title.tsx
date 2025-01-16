@@ -8,7 +8,7 @@ interface GraphTitleProps {
 
 const GraphTitle: React.FC<GraphTitleProps> = ({ number, title, description }) => {
   return (
-    <div className="p-10 bg-white">
+    <div className="pb-10 px-10 bg-white">
       <h2 className="text-2xl font-bold text-gray-800 flex items-baseline">
         <span className="mr-2">{number}.</span>
         {title}
